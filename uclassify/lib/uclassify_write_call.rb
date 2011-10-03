@@ -4,10 +4,15 @@ class UClassifyWriteCall
     @api_key = write_api_key
     @classifier_name = classifier_name
     @createIDs = Array.new
+    @classes = Array.new
   end
   
   def add_create_id create_id
     @createIDs << create_id
+  end
+  
+  def add_class my_class
+    @classes << my_class
   end
   
   def to_xml_node xml_document
@@ -17,6 +22,11 @@ class UClassifyWriteCall
     
     @createIDs.each do |id|
       node = id.to_xml_node(xml_document)
+      write_call_node.add_child(node)
+    end
+    
+    @classes.each do |my_class|
+      node = my_class.to_xml_node(xml_document)
       write_call_node.add_child(node)
     end
     

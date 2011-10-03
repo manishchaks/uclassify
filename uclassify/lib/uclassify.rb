@@ -2,6 +2,7 @@ require 'rubygems'
 require 'nokogiri'
 require File.join(File.dirname(__FILE__), 'uclassify_write_call.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_create_id.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_class.rb')
 class UClassify
   attr_accessor :write_api_key
   attr_accessor :read_api_key
@@ -11,10 +12,7 @@ class UClassify
   end
    
   def create_classifier(classifier_name,create_id)
-    if (!@write_api_key) 
-      raise "No Write API Key for UClassify. Please specify one with 'uclassify.write_api_key=YOUR_KEY'"
-    end
-    
+    check_for_write_key
     @write_api_key = write_api_key
     write_call = UClassifyWriteCall.new(write_api_key,classifier_name)
     id = UClassifyCreateID.new(create_id)
@@ -38,4 +36,22 @@ class UClassify
     document.to_xml
   end
   
+  def with_classifier_name classifier_name 
+    check_for_write_key
+    write_call = UClassifyWriteCall.new(@write_api_key,classifier_name)
+    @write_calls << write_call
+    self
+  end
+  
+  def add_class (class_id, class_name)
+    new_class = UClassifyClass.new(class_id,class_name)
+    @write_calls.last.add_class(new_class)
+    self
+  end 
+  
+  def check_for_write_key
+    if (!@write_api_key) 
+      raise "No Write API Key for UClassify. Please specify one with 'uclassify.write_api_key=YOUR_KEY'"
+    end
+  end
 end
