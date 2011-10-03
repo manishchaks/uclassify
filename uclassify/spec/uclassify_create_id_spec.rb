@@ -8,6 +8,7 @@ describe "UClassify Create ID" do
     create_id = UClassifyCreateID.new('DUMMY_CREATE_ID')
     document = Nokogiri::XML::Document.new
     
-    create_id.to_xml_node(document).to_xml.should == "<create id=\"DUMMY_CREATE_ID\"/>"
+    expected_string =  "<create id=\"DUMMY_CREATE_ID\"/>"
+    xml_cmp(create_id.to_xml_node(document).to_xml, expected_string).should == true
   end
 end

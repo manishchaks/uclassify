@@ -17,6 +17,8 @@ describe "UClassify Create Call" do
     document = Nokogiri::XML::Document.new
     
     # Check if the write call is correctly formed  
-    write_call.to_xml_node(document).to_xml.should == "<writeCalls writeApiKey=\"DUMMY_WRITE_API_KEY\" classifierName=\"DUMMY_CLASSIFIER_ID\">\n  <create id=\"DUMMY_CREATE_ID\"/>\n</writeCalls>"
+    expected_string=  "<writeCalls writeApiKey=\"DUMMY_WRITE_API_KEY\" classifierName=\"DUMMY_CLASSIFIER_ID\"><create id=\"DUMMY_CREATE_ID\"/></writeCalls>"
+    
+    xml_cmp(write_call.to_xml_node(document).to_xml , expected_string).should == true
   end
 end
