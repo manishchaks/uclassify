@@ -7,8 +7,6 @@ describe "UClassify base" do
     uclassify = UClassify.new
     uclassify.write_api_key = 'DUMMY_API_KEY'
     uclassify.create_classifier('DUMMY_CLASSIFIER_NAME','DUMMY_CLASSIFIER_ID')
-    
-    puts uclassify.generate_request_string
     expected_string = %Q{
       <?xml version="1.0" encoding="utf-8"?>
     <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.0.1">
@@ -16,8 +14,7 @@ describe "UClassify base" do
         <create id="DUMMY_CLASSIFIER_ID"/>
       </writeCalls>
     </uclassify>
-    }
-    
+    }    
     xml_cmp(uclassify.generate_request_string,expected_string).should == true
   end
   
