@@ -3,6 +3,7 @@ require 'nokogiri'
 require File.join(File.dirname(__FILE__), 'uclassify_write_call.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_create_id.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_class.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_text.rb')
 class UClassify
   attr_accessor :write_api_key
   attr_accessor :read_api_key
