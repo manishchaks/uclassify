@@ -10,6 +10,7 @@ class UClassify
   
   def initialize
     @write_calls = Array.new
+    @text_trains = Array.new
   end
    
   def create_classifier(classifier_name,create_id)
@@ -22,19 +23,37 @@ class UClassify
   end
   
   def generate_request_string
-    document = Nokogiri::XML::Document.new("1.0")
-    document.encoding="utf-8"
-    uclassify_root_node =  Nokogiri::XML::Node.new('uclassify',document)
-    uclassify_root_node['xmlns']="http://api.uclassify.com/1/RequestSchema"
-    uclassify_root_node['version']="1.0.1"
-    document.root=uclassify_root_node
-    
+    @document = Nokogiri::XML::Document.new("1.0")
+    @document.encoding="utf-8"
+    @uclassify_root_node =  Nokogiri::XML::Node.new('uclassify',@document)
+    @uclassify_root_node['xmlns']="http://api.uclassify.com/1/RequestSchema"
+    @uclassify_root_node['version']="1.0.1"
+    @document.root=@uclassify_root_node
+    generate_train_texts
+    generate_write_calls
+    @document.to_xml
+  end
+  
+  def generate_train_texts
+    #add all the text train calls
+     if @text_trains.size >0 
+       main_texts_node = Nokogiri::XML::Node.new('texts',@document)
+       @uclassify_root_node.add_child(main_texts_node)
+       @text_trains.each do |text_train|
+         node=text_train.to_xml_node(@document)
+         main_texts_node.add_child(node)
+       end
+     end
+  end
+  
+  def generate_write_calls 
     #add all the write calls
-    @write_calls.each do |write_call|
-      node=write_call.to_xml_node(document)
-      uclassify_root_node.add_child(node)
+    if @write_calls.size > 0
+      @write_calls.each do |write_call|
+        node=write_call.to_xml_node(@document)
+        @uclassify_root_node.add_child(node)
+      end
     end
-    document.to_xml
   end
   
   def with_classifier_name classifier_name 
@@ -49,6 +68,12 @@ class UClassify
     @write_calls.last.add_class(new_class)
     self
   end 
+  
+  def train_text(text_id,text)
+    text = UClassifyText.new(text_id,text)
+    @text_trains << text
+    self
+  end
   
   def check_for_write_key
     if (!@write_api_key) 

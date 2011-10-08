@@ -43,4 +43,16 @@ describe "UClassify base" do
     }
    xml_cmp(uclassify.generate_request_string,expected_string).should==true
   end
+  
+  it "should be possible to train classes with texts " do
+    uclassify = UClassify.new
+    uclassify.write_api_key = 'DUMMY_API_KEY'
+    uclassify.with_classifier_name("DUMMY_CLASSIFIER_ID").train_text("TextID1","SomeTextOne").train_text("TextID2","SomeTextTwo")
+    # uclassify.add_training_class("ID1","ClassName1","TextID1").add_training_class("ID2","ClassName2","TextID2")
+    expected_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<uclassify xmlns=\"http://api.uclassify.com/1/RequestSchema\" version=\"1.0.1\">\n  <texts>\n    <textBase64 id=\"TextID1\">U29tZVRleHRPbmU=</textBase64>\n    <textBase64 id=\"TextID2\">U29tZVRleHRUd28=</textBase64>\n  </texts>\n  <writeCalls writeApiKey=\"DUMMY_API_KEY\" classifierName=\"DUMMY_CLASSIFIER_ID\"/>\n</uclassify>\n"
+
+    xml_cmp(uclassify.generate_request_string,expected_string).should==true
+       
+  end
+  
 end
