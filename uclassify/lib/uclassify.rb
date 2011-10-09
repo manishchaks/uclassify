@@ -4,6 +4,7 @@ require File.join(File.dirname(__FILE__), 'uclassify_write_call.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_create_id.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_class.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_text.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_training_class.rb')
 class UClassify
   attr_accessor :write_api_key
   attr_accessor :read_api_key
@@ -68,6 +69,12 @@ class UClassify
     @write_calls.last.add_class(new_class)
     self
   end 
+  
+  def add_training_class (train_id,class_name,text_id)
+    training_class = UClassifyTrainClass.new(train_id,class_name,text_id)
+    @write_calls << training_class
+    self
+  end
   
   def train_text(text_id,text)
     text = UClassifyText.new(text_id,text)
