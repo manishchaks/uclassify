@@ -1,4 +1,3 @@
-
 class UClassifyQuery
   def initialize (read_api_key)
     @read_api_key = read_api_key
@@ -29,6 +28,8 @@ class UClassifyQuery
     generate_read_calls
     @document.to_xml
   end
+  
+private
   
   def generate_read_calls
     if @classifiers.size > 0 

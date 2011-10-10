@@ -28,8 +28,7 @@ class UClassifyWriteCall
     @classes.each do |my_class|
       node = my_class.to_xml_node(xml_document)
       write_call_node.add_child(node)
-    end
-    
+    end  
     write_call_node
   end
   

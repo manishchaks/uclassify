@@ -6,8 +6,6 @@ class UClassifyText
   end
   
   def to_xml_node xml_document
-    # this should create something like
-    #  <create id="ID"/>
     text_base64_node = Nokogiri::XML::Node.new('textBase64',xml_document)
     text_base64_node['id'] = @text_id.to_s
     encoded_string = Base64.encode64(@text)   

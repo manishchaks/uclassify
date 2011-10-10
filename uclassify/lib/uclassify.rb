@@ -37,26 +37,9 @@ class UClassify
     @document.to_xml
   end
   
-  def generate_train_texts
-    #add all the text train calls
-     if @text_trains.size >0 
-       main_texts_node = Nokogiri::XML::Node.new('texts',@document)
-       @uclassify_root_node.add_child(main_texts_node)
-       @text_trains.each do |text_train|
-         node=text_train.to_xml_node(@document)
-         main_texts_node.add_child(node)
-       end
-     end
-  end
-  
-  def generate_write_calls 
-    #add all the write calls
-    if @write_calls.size > 0
-      @write_calls.each do |write_call|
-        node=write_call.to_xml_node(@document)
-        @uclassify_root_node.add_child(node)
-      end
-    end
+  def fire_request
+    request = UClassifyRequest.new
+    request.fire_request(generate_request_string)
   end
   
   def with_classifier_name classifier_name 
@@ -82,6 +65,29 @@ class UClassify
     text = UClassifyText.new(text_id,text)
     @text_trains << text
     self
+  end
+
+private
+  def generate_train_texts
+    #add all the text train calls
+     if @text_trains.size >0 
+       main_texts_node = Nokogiri::XML::Node.new('texts',@document)
+       @uclassify_root_node.add_child(main_texts_node)
+       @text_trains.each do |text_train|
+         node=text_train.to_xml_node(@document)
+         main_texts_node.add_child(node)
+       end
+     end
+  end
+  
+  def generate_write_calls 
+    #add all the write calls
+    if @write_calls.size > 0
+      @write_calls.each do |write_call|
+        node=write_call.to_xml_node(@document)
+        @uclassify_root_node.add_child(node)
+      end
+    end
   end
   
   def check_for_write_key
