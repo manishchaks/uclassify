@@ -5,6 +5,8 @@ require File.join(File.dirname(__FILE__), 'uclassify_create_id.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_class.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_text.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_training_class.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_classifier.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_query.rb')
 class UClassify
   attr_accessor :write_api_key
   attr_accessor :read_api_key

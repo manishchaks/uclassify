@@ -54,5 +54,4 @@ describe "UClassify base" do
 
     xml_cmp(uclassify.generate_request_string,expected_string).should==true       
   end
-  
 end
