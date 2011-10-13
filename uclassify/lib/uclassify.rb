@@ -42,7 +42,26 @@ class UClassify
   
   def fire_request
     request = UClassifyRequest.new
-    request.fire_request(generate_request_string)
+    @last_response = request.fire_request(generate_request_string)
+    if is_response_valid?
+      puts "SUCCESS!"
+    else
+      puts "FAILURE"
+    end
+    puts "Reply from server:"  
+    @last_response
+  end
+  
+  def is_response_valid? 
+    response_as_hash['uclassify']['status']['success'] == "true"
+  end
+  
+  def response_as_hash
+    if @last_response
+          @last_response.parsed_response
+      else
+        raise "No request has been fired yet. Please do a uclassify.fire_request"
+      end
   end
   
   def with_classifier_name classifier_name 
