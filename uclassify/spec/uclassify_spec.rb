@@ -9,7 +9,7 @@ describe "UClassify base" do
     uclassify.create_classifier('DUMMY_CLASSIFIER_NAME','DUMMY_CLASSIFIER_ID')
     expected_string = %Q{
       <?xml version="1.0" encoding="utf-8"?>
-    <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.0.1">
+    <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
       <writeCalls writeApiKey="DUMMY_API_KEY" classifierName="DUMMY_CLASSIFIER_NAME">
         <create id="DUMMY_CLASSIFIER_ID"/>
       </writeCalls>
@@ -34,7 +34,7 @@ describe "UClassify base" do
     
     expected_string = %Q{
       <?xml version="1.0" encoding="utf-8"?>
-    <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.0.1">
+    <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
       <writeCalls writeApiKey="DUMMY_API_KEY" classifierName="DUMMY_CLASSIFIER_ID">
         <addClass id="Class_ID_1" className="Class_Name_1"/>
         <addClass id="Class_ID2" className="Class_name2"/>
@@ -50,7 +50,7 @@ describe "UClassify base" do
     uclassify.with_classifier_name("DUMMY_CLASSIFIER_ID").train_text("TextID1","SomeTextOne").train_text("TextID2","SomeTextTwo")
     uclassify.add_training_class("ID1","ClassName1","TextID1").add_training_class("ID2","ClassName2","TextID2")
 
-    expected_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<uclassify xmlns=\"http://api.uclassify.com/1/RequestSchema\" version=\"1.0.1\">\n  <texts>\n    <textBase64 id=\"TextID1\">U29tZVRleHRPbmU=</textBase64>\n    <textBase64 id=\"TextID2\">U29tZVRleHRUd28=</textBase64>\n  </texts>\n  <writeCalls writeApiKey=\"DUMMY_API_KEY\" classifierName=\"DUMMY_CLASSIFIER_ID\"/>\n  <train id=\"ID1\" className=\"ClassName1\" textId=\"TextID1\"/>\n  <train id=\"ID2\" className=\"ClassName2\" textId=\"TextID2\"/>\n</uclassify>\n"  
+    expected_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<uclassify xmlns=\"http://api.uclassify.com/1/RequestSchema\" version=\"1.01\">\n  <texts>\n    <textBase64 id=\"TextID1\">U29tZVRleHRPbmU=</textBase64>\n    <textBase64 id=\"TextID2\">U29tZVRleHRUd28=</textBase64>\n  </texts>\n  <writeCalls writeApiKey=\"DUMMY_API_KEY\" classifierName=\"DUMMY_CLASSIFIER_ID\"/>\n  <train id=\"ID1\" className=\"ClassName1\" textId=\"TextID1\"/>\n  <train id=\"ID2\" className=\"ClassName2\" textId=\"TextID2\"/>\n</uclassify>\n"  
 
     xml_cmp(uclassify.generate_request_string,expected_string).should==true       
   end

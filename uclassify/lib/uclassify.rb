@@ -7,6 +7,7 @@ require File.join(File.dirname(__FILE__), 'uclassify_text.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_training_class.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_classifier.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_query.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_request.rb')
 class UClassify
   attr_accessor :write_api_key
   attr_accessor :read_api_key
@@ -30,11 +31,13 @@ class UClassify
     @document.encoding="utf-8"
     @uclassify_root_node =  Nokogiri::XML::Node.new('uclassify',@document)
     @uclassify_root_node['xmlns']="http://api.uclassify.com/1/RequestSchema"
-    @uclassify_root_node['version']="1.0.1"
+    @uclassify_root_node['version']="1.01"
     @document.root=@uclassify_root_node
     generate_train_texts
     generate_write_calls
-    @document.to_xml
+    xml_string = @document.to_xml
+    xml_string.split.join("\n")
+    xml_string   
   end
   
   def fire_request
