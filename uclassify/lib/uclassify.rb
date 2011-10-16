@@ -72,8 +72,8 @@ class UClassify
     self
   end
   
-  def add_class (class_id, class_name)
-    new_class = UClassifyClass.new(class_id,class_name)
+  def add_class (class_name)
+    new_class = UClassifyClass.new(class_name)
     @write_calls.last.add_class(new_class)
     self
   end 

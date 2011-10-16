@@ -30,14 +30,14 @@ describe "UClassify base" do
   it "should allow classes to be added to a classifier" do
     uclassify = UClassify.new
     uclassify.write_api_key = 'DUMMY_API_KEY'
-    uclassify.with_classifier_name("DUMMY_CLASSIFIER_ID").add_class('Class_ID_1',"Class_Name_1").add_class("Class_ID2","Class_name2")
+    uclassify.with_classifier_name("DUMMY_CLASSIFIER_ID").add_class("Class_Name_1").add_class("Class_Name_2")
     
     expected_string = %Q{
       <?xml version="1.0" encoding="utf-8"?>
     <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
       <writeCalls writeApiKey="DUMMY_API_KEY" classifierName="DUMMY_CLASSIFIER_ID">
-        <addClass id="Class_ID_1" className="Class_Name_1"/>
-        <addClass id="Class_ID2" className="Class_name2"/>
+        <addClass id="class_name_1_id" className="Class_Name_1"/>
+        <addClass id="class_name_2_id" className="Class_Name_2"/>
       </writeCalls>
     </uclassify>
     }
