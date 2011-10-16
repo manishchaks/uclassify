@@ -18,11 +18,11 @@ class UClassify
     @text_trains = Array.new
   end
    
-  def create_classifier(classifier_name,create_id)
+  def create_classifier(classifier_name)
     check_for_write_key
     @write_api_key = write_api_key
     write_call = UClassifyWriteCall.new(write_api_key,classifier_name)
-    id = UClassifyCreateID.new(create_id)
+    id = UClassifyCreateID.new(UClassifyUtils.string_to_id(classifier_name))
     write_call.add_create_id(id)
     @write_calls << write_call
   end
