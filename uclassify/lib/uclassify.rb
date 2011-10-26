@@ -78,14 +78,21 @@ class UClassify
     self
   end 
   
+  def train_class_with_text (class_name,text)
+    train_id = UClassifyUtils.string_to_id(class_name)
+    text_id = UClassifyUtils.string_to_id(text)
+    add_training_class(train_id,class_name,text_id)
+    train_text(text)
+  end
+  
   def add_training_class (train_id,class_name,text_id)
     training_class = UClassifyTrainClass.new(train_id,class_name,text_id)
     @write_calls << training_class
     self
   end
   
-  def train_text(text_id,text)
-    text = UClassifyText.new(text_id,text)
+  def train_text(text)
+    text = UClassifyText.new(text)
     @text_trains << text
     self
   end

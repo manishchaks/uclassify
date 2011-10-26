@@ -5,17 +5,23 @@ class UClassifyQuery
     @classifiers = Array.new
   end
   
-  def add_text (textid,text)
-    text = UClassifyText.new(textid,text)
+  def add_text (text)
+    text = UClassifyText.new(text)
     @texts << text
     self
   end
   
-  def add_classifier (classifier_name,text_id)
-    classifier = UClassifyClassifier.new(classifier_name,text_id)
+  def add_classifier (classifier_name,text)
+    classifier = UClassifyClassifier.new(classifier_name,text)
     @classifiers << classifier 
     self  
   end
+  
+  def classify_text(classifier_name,text)
+    add_classifier(classifier_name,text)
+    add_text(text)
+  end
+  
   
   def get_query_string
     @document = Nokogiri::XML::Document.new("1.0")
