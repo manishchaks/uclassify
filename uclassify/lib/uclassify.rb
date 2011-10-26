@@ -85,19 +85,20 @@ class UClassify
     train_text(text)
   end
   
+private
+
   def add_training_class (train_id,class_name,text_id)
     training_class = UClassifyTrainClass.new(train_id,class_name,text_id)
-    @write_calls << training_class
+    @write_calls.last.add_training_class(training_class)  
     self
   end
-  
+
   def train_text(text)
     text = UClassifyText.new(text)
     @text_trains << text
     self
   end
-
-private
+  
   def generate_train_texts
     #add all the text train calls
      if @text_trains.size >0 

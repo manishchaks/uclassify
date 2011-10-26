@@ -9,7 +9,6 @@ class UClassifyText
     text_base64_node['id'] = UClassifyUtils.string_to_id(@text)
     encoded_string = Base64.encode64(@text)   
     
-    # Nokogiri doesnt give me an easy way to add a text node
     frag = text_base64_node.parse(encoded_string.strip)
     text_base64_node.add_child(frag)
     text_base64_node   
