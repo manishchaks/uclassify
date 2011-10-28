@@ -11,7 +11,7 @@ describe "UClassify base" do
       <?xml version="1.0" encoding="utf-8"?>
     <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
       <writeCalls writeApiKey="DUMMY_API_KEY" classifierName="DUMMY_CLASSIFIER">
-        <create id="dummy_classifier_id"/>
+        <create id="5d32967361454d354c26dde8fab3ce28"/>
       </writeCalls>
     </uclassify>
     }   
@@ -36,8 +36,8 @@ describe "UClassify base" do
       <?xml version="1.0" encoding="utf-8"?>
     <uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
       <writeCalls writeApiKey="DUMMY_API_KEY" classifierName="DUMMY_CLASSIFIER_ID">
-        <addClass id="class_name_1_id" className="Class_Name_1"/>
-        <addClass id="class_name_2_id" className="Class_Name_2"/>
+        <addClass id="451685f25480447daf6f6d7b0a5df79d" className="Class_Name_1"/>
+        <addClass id="e0d6cc5b323e77cf61428f3bfc0ef894" className="Class_Name_2"/>
       </writeCalls>
     </uclassify>
     }
@@ -52,14 +52,15 @@ describe "UClassify base" do
     expected_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>
     <uclassify xmlns=\"http://api.uclassify.com/1/RequestSchema\" version=\"1.01\">
       <texts>
-        <textBase64 id=\"sometextone_id\">U29tZVRleHRPbmU=</textBase64>
-        <textBase64 id=\"sometexttwo_id\">U29tZVRleHRUd28=</textBase64>
+        <textBase64 id=\"a9aea8382b0cfabd38baaa7ae6e66937\">U29tZVRleHRPbmU=</textBase64>
+        <textBase64 id=\"30baefbb457d5a23b95b184c8f05eb8d\">U29tZVRleHRUd28=</textBase64>
       </texts>
       <writeCalls writeApiKey=\"DUMMY_API_KEY\" classifierName=\"DUMMY_CLASSIFIER\">
-      <train id=\"classone_id\" className=\"ClassOne\" textId=\"sometextone_id\"/>
-      <train id=\"classtwo_id\" className=\"ClassTwo\" textId=\"sometexttwo_id\"/>
+      <train id=\"7f2e5c9c34e90179ea539c7f7bc1cc1a\" className=\"ClassOne\" textId=\"a9aea8382b0cfabd38baaa7ae6e66937\"/>
+      <train id=\"7911cc8cbb85a37c063049a9c7336acd\" className=\"ClassTwo\" textId=\"30baefbb457d5a23b95b184c8f05eb8d\"/>
       </writeCalls>
-    </uclassify>"  
+    </uclassify>" 
+
     xml_cmp(uclassify.generate_request_string,expected_string).should==true         
   end
 end

@@ -7,6 +7,6 @@ describe "UClassify Create Class" do
     document = Nokogiri::XML::Document.new
     
     expected_string =  "<create id=\"DUMMY_CREATE_ID\"/>"
-   create_class.to_xml_node(document).to_xml.should =="<addClass id=\"dummy_class_id\" className=\"DUMMY_CLASS\"/>"
+   create_class.to_xml_node(document).to_xml.should =="<addClass id=\"7642b754271a20bbf7b0d91962ec62e5\" className=\"DUMMY_CLASS\"/>"
   end
 end

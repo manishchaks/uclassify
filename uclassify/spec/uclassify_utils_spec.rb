@@ -3,6 +3,6 @@ require 'lib/uclassify'
 
 describe "UClassify Utils" do
   it "Should take a string and convert it into a valid UClassify ID" do
-    UClassifyUtils.string_to_id('Hello how are you').should == 'hello_how_are_you_id'
+    UClassifyUtils.string_to_id('Hello how are you').should == '512a1a7503426d5400b1d51011540279'
   end
 end
