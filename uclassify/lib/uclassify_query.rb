@@ -28,7 +28,7 @@ class UClassifyQuery
     @document.encoding="utf-8"
     @uclassify_root_node =  Nokogiri::XML::Node.new('uclassify',@document)
     @uclassify_root_node['xmlns']="http://api.uclassify.com/1/RequestSchema"
-    @uclassify_root_node['version']="1.0.1"
+    @uclassify_root_node['version']="1.01"
     @document.root=@uclassify_root_node
     generate_texts
     generate_read_calls
