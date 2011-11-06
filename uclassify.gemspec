@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{uclassify}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Manish Chakravarty}]
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "lib/uclassify_response.rb",
     "lib/uclassify_text.rb",
     "lib/uclassify_training_class.rb",
+    "lib/uclassify_untraining_class.rb",
     "lib/uclassify_utils.rb",
     "lib/uclassify_write_call.rb",
     "spec/spec_helper.rb",
@@ -46,7 +47,8 @@ Gem::Specification.new do |s|
     "spec/uclassify_training_class_spec.rb",
     "spec/uclassify_utils_spec.rb",
     "spec/uclassify_write_call_spec.rb",
-    "test-helpers/xml_compare.rb"
+    "test-helpers/xml_compare.rb",
+    "uclassify.gemspec"
   ]
   s.homepage = %q{http://github.com/manishchaks/uclassify}
   s.licenses = [%q{MIT}]
