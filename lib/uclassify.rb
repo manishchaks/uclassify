@@ -5,6 +5,7 @@ require File.join(File.dirname(__FILE__), 'uclassify_create_id.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_class.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_text.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_training_class.rb')
+require File.join(File.dirname(__FILE__), 'uclassify_untraining_class.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_classifier.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_query.rb')
 require File.join(File.dirname(__FILE__), 'uclassify_request.rb')
@@ -85,12 +86,25 @@ class UClassify
     train_text(text)
   end
   
+  def untrain_class_with_text(class_name,text)
+    train_id = UClassifyUtils.string_to_id(class_name)
+    text_id = UClassifyUtils.string_to_id(text)
+    untrain_class(train_id,class_name,text_id)
+    train_text(text)
+    
+  end
+  
 private
 
   def add_training_class (train_id,class_name,text_id)
     training_class = UClassifyTrainClass.new(train_id,class_name,text_id)
     @write_calls.last.add_training_class(training_class)  
     self
+  end
+  
+  def untrain_class(train_id,class_name,text_id)
+    untraining_class = UClassifyUnTrainClass.new(train_id,class_name,text_id)
+    @write_calls.last.add_training_class(untraining_class)
   end
 
   def train_text(text)

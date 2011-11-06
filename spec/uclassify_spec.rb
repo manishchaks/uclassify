@@ -63,4 +63,12 @@ describe "UClassify base" do
 
     xml_cmp(uclassify.generate_request_string,expected_string).should==true         
   end
+  
+  it "should be possible to untrain classifiers on texts" do 
+    uclassify = UClassify.new
+    uclassify.write_api_key = "Dummy API Key "
+    uclassify.with_classifier_name("DUMMY Classifier").untrain_class_with_text("ClassOne","SomeTextOne")
+    expected_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<uclassify xmlns=\"http://api.uclassify.com/1/RequestSchema\" version=\"1.01\">\n  <texts>\n    <textBase64 id=\"a9aea8382b0cfabd38baaa7ae6e66937\">U29tZVRleHRPbmU=</textBase64>\n  </texts>\n  <writeCalls writeApiKey=\"Dummy API Key \" classifierName=\"DUMMY Classifier\">\n    <untrain id=\"7f2e5c9c34e90179ea539c7f7bc1cc1a\" className=\"ClassOne\" textId=\"a9aea8382b0cfabd38baaa7ae6e66937\"/>\n  </writeCalls>\n</uclassify>\n"
+    xml_cmp(uclassify.generate_request_string,expected_string).should == true
+  end
 end
