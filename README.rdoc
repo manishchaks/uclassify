@@ -1,6 +1,6 @@
 = uclassify
 
-Description goes here.
+A Ruby gem for the UClassify API - http://www.uclassify.com/XmlApiDocumentation.aspx#examples
 
 == Contributing to uclassify
  
